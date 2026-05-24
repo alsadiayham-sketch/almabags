@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png">
 </head>
 <body>
     <div class="discount-banner" id="discountBanner" style="display:none;">
@@ -20,6 +21,7 @@
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">
+                <img src="logo.png" alt="Alma Bags" class="logo-img" id="logoImg">
                 <span id="logoText" class="logo-text">Alma Bags</span>
             </a>
             <div class="nav-search">
@@ -50,7 +52,10 @@
     <section class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 id="heroTitle">Alma Bags</h1>
+            <div class="hero-logo">
+                <img src="logo.png" id="heroLogo" alt="Alma Bags" class="hero-logo-img">
+            </div>
+            <h1 id="heroTitle" style="display:none;">Alma Bags</h1>
             <p class="hero-subtitle" id="heroSubtitle">أرقى الشنط والحقائب الأصلية في فلسطين</p>
             <p class="hero-tagline">تصاميم أنيقة بلمسة فاخرة - توصيل للضفة والقدس والداخل</p>
             <a href="#products" class="btn-primary">تسوقي الآن</a>
