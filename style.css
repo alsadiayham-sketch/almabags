@@ -191,7 +191,7 @@ body.has-banner .mobile-menu { top: 102px; }
 
 .hero-logo-img {
     width: auto;
-    height: 180px;
+    height: 120px;
     border-radius: 12px;
     object-fit: contain;
     box-shadow: 0 5px 30px rgba(0,0,0,0.3);
