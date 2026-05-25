@@ -94,7 +94,14 @@
         const DELIVERY_COSTS = { westbank: 20, jerusalem: 30, inside: 50 };
         const DELIVERY_LABELS = { westbank: 'الضفة', jerusalem: 'القدس', inside: 'الداخل' };
 
-        document.addEventListener('DOMContentLoaded', initializeCheckout);
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('alma_order_submitted')) {
+                sessionStorage.removeItem('alma_order_submitted');
+                window.location.href = 'confirmation.html';
+                return;
+            }
+            initializeCheckout();
+        });
 
         async function initializeCheckout() {
             // Render immediately with local data
@@ -378,9 +385,9 @@
                 }
                 localStorage.setItem('alma_last_order', JSON.stringify(order));
                 localStorage.setItem('alma_cart', '[]');
+                sessionStorage.setItem('alma_order_submitted', 'true');
                 const whatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, buildWhatsAppMessage(order));
-                window.open(whatsappUrl, '_blank');
-                window.location.href = 'confirmation.html';
+                window.location.href = whatsappUrl;
             } catch (error) {
                 console.error(error);
                 alert('تعذر حفظ الطلب حالياً، حاولي مرة أخرى.');
