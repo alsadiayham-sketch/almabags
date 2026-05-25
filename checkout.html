@@ -379,7 +379,8 @@
                 localStorage.setItem('alma_last_order', JSON.stringify(order));
                 localStorage.setItem('alma_cart', '[]');
                 const whatsappUrl = buildWhatsAppUrl(siteSettings.whatsappNumber, buildWhatsAppMessage(order));
-                window.location.href = whatsappUrl;
+                window.open(whatsappUrl, '_blank');
+                window.location.href = 'confirmation.html';
             } catch (error) {
                 console.error(error);
                 alert('تعذر حفظ الطلب حالياً، حاولي مرة أخرى.');
