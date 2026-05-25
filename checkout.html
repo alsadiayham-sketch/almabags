@@ -179,8 +179,8 @@
                                 <div class="delivery-option ${selectedDelivery === 'pickup' ? 'selected' : ''}" onclick="selectDelivery('pickup')">
                                     <div class="radio-dot"></div>
                                     <div class="delivery-option-info">
-                                        <h4>استلام من نابلس (مجاني)</h4>
-                                        <p>استلمي طلبك من نقطة التسليم في نابلس بدون تكلفة إضافية</p>
+                                        <h4>استلام من رام الله (مجاني)</h4>
+                                        <p>استلمي طلبك من نقطة التسليم في رام الله بدون تكلفة إضافية</p>
                                     </div>
                                 </div>
                                 <div class="delivery-option ${selectedDelivery === 'delivery' ? 'selected' : ''}" onclick="selectDelivery('delivery')">
@@ -344,8 +344,8 @@
             const itemsText = order.items.map(function (item, index) {
                 return (index + 1) + '. ' + item.name + ' (' + item.sizeLabel + ')\n   السعر: ' + item.price + ' شيكل × ' + item.qty + ' = ' + item.lineTotal + ' شيكل';
             }).join('\n');
-            const shippingText = order.delivery === 'pickup' ? 'مجاني (استلام من نابلس)' : formatCurrency(order.deliveryCost) + ' (' + DELIVERY_LABELS[order.region] + ')';
-            const deliveryLabel = order.delivery === 'pickup' ? 'استلام من نابلس' : 'توصيل إلى ' + DELIVERY_LABELS[order.region] + ': ' + order.address;
+            const shippingText = order.delivery === 'pickup' ? 'مجاني (استلام من رام الله)' : formatCurrency(order.deliveryCost) + ' (' + DELIVERY_LABELS[order.region] + ')';
+                        const deliveryLabel = order.delivery === 'pickup' ? 'استلام من رام الله' : 'توصيل إلى ' + DELIVERY_LABELS[order.region] + ': ' + order.address;
             let msg = 'مرحبا، طلب جديد (' + order.id + '):\n';
             msg += 'ـــــــــــــــــــــــــــ\n';
             msg += 'الاسم: ' + order.customerName + '\n';
