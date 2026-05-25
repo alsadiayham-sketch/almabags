@@ -94,25 +94,30 @@
         const DELIVERY_COSTS = { westbank: 20, jerusalem: 30, inside: 50 };
         const DELIVERY_LABELS = { westbank: 'الضفة', jerusalem: 'القدس', inside: 'الداخل' };
 
-        document.addEventListener('DOMContentLoaded', function() {
-            if (sessionStorage.getItem('alma_order_submitted')) {
+        function checkOrderCompleted() {
+            var orderSubmitted = sessionStorage.getItem('alma_order_submitted');
+            var cartEmpty = !JSON.parse(localStorage.getItem('alma_cart') || '[]').length;
+            if (orderSubmitted && cartEmpty) {
                 sessionStorage.removeItem('alma_order_submitted');
                 window.location.href = 'confirmation.html';
-                return;
+                return true;
             }
+            return false;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (checkOrderCompleted()) return;
             initializeCheckout();
         });
 
-        // Handle back-forward cache (bfcache) restore - DOMContentLoaded won't fire again
+        // Fires when browser restores page from bfcache (back button)
         window.addEventListener('pageshow', function(event) {
-            if (event.persisted && sessionStorage.getItem('alma_order_submitted')) {
-                sessionStorage.removeItem('alma_order_submitted');
-                window.location.href = 'confirmation.html';
-            } else if (event.persisted) {
-                // Page restored from bfcache but no order submitted - reset button state
-                var btn = document.getElementById('confirmOrderBtn');
-                if (btn) { btn.disabled = false; btn.textContent = 'تأكيد الطلب عبر واتساب'; }
-            }
+            if (event.persisted) checkOrderCompleted();
+        });
+
+        // Fires when user switches back to the tab (mobile tab-switching from WhatsApp)
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') checkOrderCompleted();
         });
 
         async function initializeCheckout() {
