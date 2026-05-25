@@ -76,6 +76,18 @@ function subscribeToStoreData() {
     });
     unsubscribers = [];
 
+    // First: quickly load first 6 products for fast initial render
+    db.collection('products').orderBy('id').limit(6).get().then(function (snapshot) {
+        if (!storeLoadState.products) {
+            products = snapshot.docs.map(function (docSnap) {
+                return normalizeProduct(docSnap.data());
+            });
+            syncCartWithProducts();
+            markStoreLoaded('products');
+        }
+    }).catch(function () {});
+
+    // Then: subscribe to all products for full catalog
     unsubscribers.push(db.collection('products').onSnapshot(function (snapshot) {
         products = snapshot.docs.map(function (docSnap) {
             return normalizeProduct(docSnap.data());
